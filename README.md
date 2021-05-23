@@ -1,2 +1,4 @@
 # nlp-romanian
-sound group analysis for Romanian words
+Sound group analysis for Romanian words
+
+Known issue: hiatus identification
