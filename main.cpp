@@ -73,20 +73,20 @@ void read_words(const char file_name[], std::vector<std::u16string>& words)
     }
 }
 
-int main(int argc, const char* argv[])
+int main(int argc, const char* argv[]) noexcept
 {
     if (argc == 2)
     {
         try
         {
             std::vector<std::u16string> words;
-            read_words(argv[1], words);
+            read_words(argv[1u], words);
 
             using namespace nlp::romanian;
             using namespace nlp::romanian::phonetics;
 
             std::array<sound_group, max_word_length> sound_group_buffer;
-            sound_group_span sound_groups(sound_group_buffer.data(), 0);
+            sound_group_span sound_groups(sound_group_buffer.data(), 0u);
 
             for (auto& word: words)
             {

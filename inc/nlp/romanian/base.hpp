@@ -11,11 +11,11 @@ constexpr auto operator+(T e) noexcept //-> std::enable_if_t<std::is_enum<T>::va
 
 namespace nlp::romanian
 {
-    using chr = char16_t; // romanian character
+    using chr = char16_t; // Romanian character
     using word_span = std::basic_string_view<chr>;
     constexpr word_span::size_type max_word_length = 32u;
 
-    enum class s_chr : chr // special romanian character (only small caps for now)
+    enum class s_chr : chr // special Romanian character (only small caps for now)
     {
         aa = 0x0103,  // ă 0103
         i_a = 0x00E2, // â 00E2

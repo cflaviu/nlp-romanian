@@ -4,6 +4,7 @@ CppApplication {
     consoleApplication: true
     cpp.debugInformation: true
     cpp.cxxLanguageVersion: "c++20"
+    cpp.enableRtti: false
     cpp.includePaths: [
         "inc",
         "inc_dep",

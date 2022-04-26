@@ -16,7 +16,7 @@ namespace nlp::romanian::phonetics
     const std::string_view& notation_of(sound_group g) noexcept
     {
         static const std::string_view texts[] {
-            {"C", 1}, {"V", 1}, {"2T", 2}, {"3T", 2}, {"G3", 2}, {"X", 1},
+            {"C", 1u}, {"V", 1u}, {"2T", 2u}, {"3T", 2u}, {"G3", 2u}, {"X", 1u},
         };
 
         return texts[+g];
@@ -40,7 +40,7 @@ namespace nlp::romanian::phonetics
         }
     }
 
-    bool is_diphthong(const word_span& word_section)
+    bool is_diphthong(const word_span& word_section) noexcept
     {
         bool result = false;
         auto c1 = word_section[0];
@@ -254,18 +254,18 @@ namespace nlp::romanian::phonetics
         {
             if (is_vowel_or_semivowel(word[i]))
             {
-                auto j = i + 1;
+                auto j = i + 1u;
                 for (; j != word.size() && is_vowel_or_semivowel(word[j]); ++j) {}
                 switch (j - i)
                 {
-                    case 1:
+                    case 1u:
                     {
                         *dest = sound_group::vowel;
                         break;
                     }
-                    case 2:
+                    case 2u:
                     {
-                        if (is_diphthong({word.data() + i, 2}))
+                        if (is_diphthong({word.data() + i, 2u}))
                         {
                             *dest = sound_group::diphthong;
                         }
@@ -277,13 +277,13 @@ namespace nlp::romanian::phonetics
                         }
                         break;
                     }
-                    case 3:
+                    case 3u:
                     {
-                        if (is_triphthong({word.data() + i, 3}))
+                        if (is_triphthong({word.data() + i, 3u}))
                         {
                             *dest = sound_group::triphthong;
                         }
-                        else if (is_diphthong({word.data() + i + 1, 2}))
+                        else if (is_diphthong({word.data() + i + 1u, 2u}))
                         {
                             *dest = sound_group::vowel;
                             ++dest;
@@ -295,7 +295,7 @@ namespace nlp::romanian::phonetics
                         }
                         break;
                     }
-                    case 4:
+                    case 4u:
                     {
                         if (is_triphthong({word.data() + i + 1, 3}))
                         {
@@ -303,7 +303,7 @@ namespace nlp::romanian::phonetics
                             ++dest;
                             *dest = sound_group::triphthong;
                         }
-                        else if (is_diphthong({word.data() + i, 2}) && is_diphthong({word.data() + i + 2, 2}))
+                        else if (is_diphthong({word.data() + i, 2u}) && is_diphthong({word.data() + i + 2u, 2u}))
                         {
                             *dest = sound_group::diphthong;
                             ++dest;
@@ -315,9 +315,9 @@ namespace nlp::romanian::phonetics
                         }
                         break;
                     }
-                    case 5:
+                    case 5u:
                     {
-                        if (is_diphthong({word.data() + i, 2}) && is_triphthong({word.data() + i + 2, 3}))
+                        if (is_diphthong({word.data() + i, 2u}) && is_triphthong({word.data() + i + 2u, 3u}))
                         {
                             *dest = sound_group::diphthong;
                             ++dest;
@@ -350,11 +350,11 @@ namespace nlp::romanian::phonetics
                     case 'g':
                         if (i != word.size() && word[i] == 'h')
                         {
-                            auto j = i + 1;
+                            auto j = i + 1u;
                             if (j < word.size() && (word[j] == 'e' || word[j] == 'i'))
                             {
                                 *dest = sound_group::group_3;
-                                i += 2;
+                                i += 2u;
                                 break;
                             }
                         }
