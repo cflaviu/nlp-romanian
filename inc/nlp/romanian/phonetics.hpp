@@ -1,6 +1,7 @@
 #pragma once
 #ifndef PCH
     #include "nlp/romanian/base.hpp"
+    #include <cstdint>
     #include <span>
 #endif
 
